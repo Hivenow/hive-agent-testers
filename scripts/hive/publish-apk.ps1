@@ -46,8 +46,10 @@ try {
   }
   gh release upload test-apk $out --repo $repo --clobber
   if ($LASTEXITCODE -ne 0) { throw "Upload failed." }
-  gh release delete-asset test-apk hive-test.apk --repo $repo --yes *> $null
   Remove-Item $out -Force
+  # An unencrypted copy from before must not stay on a public release. Absent is fine.
+  $names = gh release view test-apk --repo $repo --json assets --jq '.assets[].name'
+  if ($names -contains 'hive-test.apk') { gh release delete-asset test-apk hive-test.apk --repo $repo --yes }
   Write-Host "Done: encrypted APK uploaded and APK_PASSPHRASE set for $repo."
 } finally {
   Remove-Item Env:\HIVE_APK_PASS -ErrorAction SilentlyContinue
