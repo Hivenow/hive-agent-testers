@@ -7,7 +7,8 @@
 $ErrorActionPreference = "Continue"
 if (-not (Get-Command gh -ErrorAction SilentlyContinue)) { Write-Host "Install the GitHub CLI: winget install --id GitHub.cli"; exit 1 }
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) { Write-Host "Install Git: winget install --id Git.Git"; exit 1 }
-gh auth status *> $null; if ($LASTEXITCODE -ne 0) { Write-Host "Run: gh auth login"; exit 1 }
+# --active: another stored login with an expired token must not block setup (only the active account is used).
+gh auth status --active *> $null; if ($LASTEXITCODE -ne 0) { Write-Host "Run: gh auth login"; exit 1 }
 
 # openssl ships with Git for Windows
 $openssl = (Get-Command openssl -ErrorAction SilentlyContinue).Source
