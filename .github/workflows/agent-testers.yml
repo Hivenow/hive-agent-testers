@@ -25,9 +25,10 @@ on:
         default: auto
       android_build:
         description: "Custom Android build command or prebuilt download (optional, then set apk_path)"
-        # Hive: the test-backend APK is attached to this private repo's "test-apk" release, built on
-        # the laptop (apps/mobile/scripts/build-staging.ps1). No Hive source code comes here.
-        default: 'gh release download test-apk --repo "$GITHUB_REPOSITORY" --pattern hive-test.apk --clobber'
+        # Hive: the test-backend APK is attached to the "test-apk" release ENCRYPTED (the repo is public),
+        # by scripts/hive/publish-apk.ps1, and decrypted here with the APK_PASSPHRASE secret. Built on the
+        # laptop (apps/mobile/scripts/build-staging.ps1). No Hive source code comes here.
+        default: 'gh release download test-apk --repo "$GITHUB_REPOSITORY" --pattern hive-test.apk.enc --clobber && openssl enc -d -aes-256-cbc -pbkdf2 -in hive-test.apk.enc -out hive-test.apk -pass env:APK_PASSPHRASE && rm hive-test.apk.enc'
       apk_path:
         description: Path of the .apk produced by android_build
         default: "hive-test.apk"
@@ -123,8 +124,9 @@ jobs:
           BUILD_ARGS: ${{ inputs.build_args }}
           BUILD_ARGS_SECRET: ${{ secrets.BUILD_ARGS }}
           ARTIFACT: ${{ inputs.apk_path }}
-          # Lets the prebuilt-download command read this repo's own private release.
+          # Lets the prebuilt-download command read this repo's release and decrypt the Hive APK.
           GH_TOKEN: ${{ github.token }}
+          APK_PASSPHRASE: ${{ secrets.APK_PASSPHRASE }}
         run: bash scripts/build/android.sh "$APP_DIR" "${{ inputs.framework }}"
       - name: Encrypt APK
         env: { ARTIFACT_PASSPHRASE: "${{ secrets.ARTIFACT_PASSPHRASE }}" }
