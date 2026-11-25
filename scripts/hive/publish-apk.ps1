@@ -31,7 +31,9 @@ $env:HIVE_APK_PASS = ($bytes | ForEach-Object { $_.ToString("x2") }) -join ""
 
 try {
   # 2. The secret the workflow reads.
-  $env:HIVE_APK_PASS | gh secret set APK_PASSPHRASE --repo $repo
+  # --body, not a pipe: Windows PowerShell can add a byte-order mark or line ending to piped text,
+  # and the workflow then fails with "bad decrypt" (it did, run 45688360246).
+  gh secret set APK_PASSPHRASE --repo $repo --body $env:HIVE_APK_PASS
   if ($LASTEXITCODE -ne 0) { throw "Could not set the APK_PASSPHRASE secret." }
 
   # 3. Encrypt next to a temp file, never beside the source APK.
