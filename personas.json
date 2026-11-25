@@ -3,18 +3,20 @@
     "id": "anna",
     "platform": "android",
     "profile": "Retired teacher, 68, low patience with jargon, uses large text.",
-    "goal": "Create an account and set up her first item without help.",
+    "goal": "Find a cotton kurta under Rs 1,500 from a store near you, pick a size, add it to the bag and go as far as paying with the test card.",
+    "phone": "+919000000011",
     "locale": "en-GB",
-    "geo": [51.5072, -0.1276],
+    "geo": [9.9661, 76.2867],
     "device": {"name": "Small phone, Android 11", "profile": "Nexus 5", "android_api": 30, "font_scale": 1.3, "theme": "light"}
   },
   {
     "id": "malik",
     "platform": "android",
     "profile": "Student, 21, skips every text, taps fast, dark mode everywhere.",
-    "goal": "Reach the main feature as fast as possible, skipping optional steps.",
+    "goal": "Fast: search for jeans, use the filters, add two items from the same store, change a quantity, then check out with the test card. Also try the Wishlist and Sale tabs.",
+    "phone": "+919000000014",
     "locale": "en-US",
-    "geo": [40.7128, -74.006],
+    "geo": [9.9661, 76.2867],
     "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "dark"}
   },
   {
@@ -39,9 +41,10 @@
     "id": "grace",
     "platform": "android",
     "profile": "Retired nurse, 74, low vision, uses Android's largest font size (200%).",
-    "goal": "Read every screen and complete one task without zooming.",
+    "goal": "With the largest text, find a saree or dupatta, open it, read the price and size details, add it to the bag and check out with the test card.",
+    "phone": "+919000000012",
     "locale": "en-US",
-    "geo": [41.8781, -87.6298],
+    "geo": [9.9661, 76.2867],
     "device": {"name": "Pixel 7, Android 14, 200% font", "profile": "pixel_7", "android_api": 34, "font_scale": 2.0, "theme": "light"}
   },
   {
@@ -57,9 +60,10 @@
     "id": "ravi",
     "platform": "android",
     "profile": "Shop owner, 44, reads Hindi, new to apps, careful with every button.",
-    "goal": "Understand what the app is for and finish one task without English.",
+    "goal": "First time on a shopping app: work out what Hive sells and how fast it delivers, set your delivery location, and buy one shirt with the test card. The app is in English only.",
+    "phone": "+919000000013",
     "locale": "hi-IN",
-    "geo": [28.6139, 77.209],
+    "geo": [9.9661, 76.2867],
     "device": {"name": "Small phone, Android 10", "profile": "Nexus 5X", "android_api": 29, "font_scale": 1.15, "theme": "light"}
   },
   {
